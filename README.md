@@ -3,7 +3,7 @@
 ### Install
 
 ```bash
-go get -u github.com/lineoit/gollection
+go get -u github.com/LineoIT/collection
 ```
 
 ### Example
@@ -12,7 +12,7 @@ go get -u github.com/lineoit/gollection
 package main
 
 import (
-	"github.com/lineoit/gollection"
+	"github.com/LineoIT/collection"
 )
 
 func main() {

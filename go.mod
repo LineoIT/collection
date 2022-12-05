@@ -1,3 +1,3 @@
-module github.com/lineoit/gollection
+module github.com/LineoIT/collection
 
 go 1.19

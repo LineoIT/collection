@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/lineoit/go-collection"
+	"github.com/LineoIT/collection"
 )
 
 func main() {
