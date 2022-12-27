@@ -173,3 +173,13 @@ func Reverse[T interface{}](arr []T) []T {
 	}
 	return result
 }
+
+func Of[T comparable](t ...T) *collection[T] {
+	return &collection[T]{
+		arr: t,
+	}
+}
+
+func ListOf[T comparable](items ...T) []T {
+	return items
+}
