@@ -5,17 +5,17 @@ import (
 	"strings"
 )
 
-type collection[T comparable] struct {
+type Collection[T comparable] struct {
 	arr []T
 }
 
-func Collect[T comparable](t []T) *collection[T] {
-	return &collection[T]{
+func Collect[T comparable](t []T) *Collection[T] {
+	return &Collection[T]{
 		arr: t,
 	}
 }
 
-func (c *collection[T]) Map(f func(T, int64) T) *collection[T] {
+func (c *Collection[T]) Map(f func(T, int64) T) *Collection[T] {
 	var tmp []T
 	for k, v := range c.arr {
 		tmp = append(tmp, f(v, int64(k)))
@@ -24,7 +24,7 @@ func (c *collection[T]) Map(f func(T, int64) T) *collection[T] {
 	return c
 }
 
-func (c *collection[T]) Filter(f func(T, int64) bool) *collection[T] {
+func (c *Collection[T]) Filter(f func(T, int64) bool) *Collection[T] {
 	var tmp []T
 	for k, v := range c.arr {
 		if f(v, int64(k)) {
@@ -35,17 +35,17 @@ func (c *collection[T]) Filter(f func(T, int64) bool) *collection[T] {
 	return c
 }
 
-func (c *collection[T]) Shift() *collection[T] {
+func (c *Collection[T]) Shift() *Collection[T] {
 	c.arr = c.arr[1:]
 	return c
 }
 
-func (c *collection[T]) Pop() *collection[T] {
+func (c *Collection[T]) Pop() *Collection[T] {
 	c.arr = c.arr[:len(c.arr)-1]
 	return c
 }
 
-func (c *collection[T]) Reverse() *collection[T] {
+func (c *Collection[T]) Reverse() *Collection[T] {
 	var result []T
 	for i := len(c.arr) - 1; i >= 0; i-- {
 		result = append(result, c.arr[i])
@@ -54,7 +54,7 @@ func (c *collection[T]) Reverse() *collection[T] {
 	return c
 }
 
-func (c *collection[T]) Join(sep string) string {
+func (c *Collection[T]) Join(sep string) string {
 	sb := strings.Builder{}
 	for k, v := range c.arr {
 		sb.WriteString(fmt.Sprintf("%v", v))
@@ -65,28 +65,28 @@ func (c *collection[T]) Join(sep string) string {
 	return sb.String()
 }
 
-func (c *collection[T]) Remove(index int64) *collection[T] {
+func (c *Collection[T]) Remove(index int64) *Collection[T] {
 	c.arr = append(c.arr[:index], c.arr[index+1:]...)
 	return c
 }
 
-func (c *collection[T]) ToList() []T {
+func (c *Collection[T]) ToList() []T {
 	return c.arr
 }
 
-func (c *collection[T]) First() T {
+func (c *Collection[T]) First() T {
 	return c.arr[0]
 }
 
-func (c *collection[T]) Last() T {
+func (c *Collection[T]) Last() T {
 	return c.arr[len(c.arr)-1]
 }
 
-func (c *collection[T]) Get(index int64) T {
+func (c *Collection[T]) Get(index int64) T {
 	return c.arr[index]
 }
 
-func (c *collection[T]) Contains(value T) bool {
+func (c *Collection[T]) Contains(value T) bool {
 	for _, v := range c.arr {
 		if value == v {
 			return true
@@ -174,8 +174,8 @@ func Reverse[T interface{}](arr []T) []T {
 	return result
 }
 
-func Of[T comparable](t ...T) *collection[T] {
-	return &collection[T]{
+func Of[T comparable](t ...T) *Collection[T] {
+	return &Collection[T]{
 		arr: t,
 	}
 }

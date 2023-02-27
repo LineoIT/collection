@@ -1,41 +1,41 @@
 package collection
 
-type dict[K comparable, T any] struct {
+type Dictionary[K comparable, T any] struct {
 	items map[K]T
 }
 
-func Dict[K comparable, T any](m map[K]T) *dict[K, T] {
-	return &dict[K, T]{
+func Dict[K comparable, T any](m map[K]T) *Dictionary[K, T] {
+	return &Dictionary[K, T]{
 		items: m,
 	}
 }
 
-func (d *dict[K, T]) Split() (keys []K, values []T) {
+func (d *Dictionary[K, T]) Split() (keys []K, values []T) {
 	return SplitDict(d.items)
 }
 
-func (d *dict[K, T]) Keys() (keys []K) {
+func (d *Dictionary[K, T]) Keys() (keys []K) {
 	return DictKeys(d.items)
 }
 
-func (d *dict[K, T]) Values() (values []T) {
+func (d *Dictionary[K, T]) Values() (values []T) {
 	return DictValues(d.items)
 }
 
-func (d *dict[K, T]) Has(key K) bool {
+func (d *Dictionary[K, T]) Has(key K) bool {
 	_, ok := d.items[key]
 	return ok
 }
 
-func (d *dict[K, T]) Get(key K) T {
+func (d *Dictionary[K, T]) Get(key K) T {
 	return d.items[key]
 }
 
-func (d *dict[K, T]) Set(key K, value T) {
+func (d *Dictionary[K, T]) Set(key K, value T) {
 	d.items[key] = value
 }
 
-func (d *dict[K, T]) Remove(key K) bool {
+func (d *Dictionary[K, T]) Remove(key K) bool {
 	if d.Has(key) {
 		delete(d.items, key)
 		return true
@@ -43,17 +43,17 @@ func (d *dict[K, T]) Remove(key K) bool {
 	return false
 }
 
-func (d *dict[K, T]) Map(f func(K, T) (K, T)) *dict[K, T] {
+func (d *Dictionary[K, T]) Map(f func(K, T) (K, T)) *Dictionary[K, T] {
 	d.items = MapDict(d.items, f)
 	return d
 }
 
-func (d *dict[K, T]) Filter(f func(K, T) bool) *dict[K, T] {
+func (d *Dictionary[K, T]) Filter(f func(K, T) bool) *Dictionary[K, T] {
 	d.items = FilterDict(d.items, f)
 	return d
 }
 
-func (d *dict[K, T]) Value() map[K]T {
+func (d *Dictionary[K, T]) Value() map[K]T {
 	return d.items
 }
 
